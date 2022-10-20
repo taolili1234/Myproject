@@ -63,8 +63,8 @@ public class CarController: MonoBehaviour
             wheelModel[i].position = pos;
             wheelModel[i].rotation = rot;
         }
-        wheels[0].steerAngle = a;
-        wheels[1].steerAngle = a;
+        wheels[0].steerAngle = Mathf.Lerp(wheels[0].steerAngle,a,0.1f);
+        wheels[1].steerAngle = Mathf.Lerp(wheels[1].steerAngle, a, 0.1f);
         
     }
 }

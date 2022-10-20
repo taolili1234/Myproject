@@ -9,6 +9,10 @@ public class CarController: MonoBehaviour
     public Transform center;
     public float LeftShiftSpeed;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     void Start()
     {
         GetComponent<Rigidbody>().centerOfMass = center.localPosition;

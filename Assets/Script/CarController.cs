@@ -22,52 +22,43 @@ public class CarController: MonoBehaviour
     }
 
 
-     void FixedUpdate()
+    void FixedUpdate()
     {
-        float s = 2500;
+        float s = 0;
         float a = 0;
         float b = 0;
-        if (!Input.GetKeyDown(KeyCode.UpArrow))
-        {
 
-            if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
             {
-                this.GetComponent<Rigidbody>().drag = 0f;
-                for (int i = 0; i <= 1000; i +=10)
+                for (int i = 0; i <= 3000; i +=100)
                 {
                     s = -i;
                 }
             }
-            else if(Input.GetKeyUp(KeyCode.S))
-            {
-                this.GetComponent<Rigidbody>().drag = 1f;
-            }
-
-
             if (Input.GetKey(KeyCode.A))
             {
-                a = -45;
+                a = -35;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                a = 45;
+                a = 35;
             }
             if (Input.GetKey(KeyCode.Space))
             {
-                
-                b = 1000;
+
+                b = 3000;
             }
 
             if (Input.GetKey(KeyCode.W))
             {
-                for (int  i = 0; i<= s; i += 2)
+                for (int  i = 0; i<= 3000; i += 1000)
                 {
                     s = i;
                 }
             }
-            else if(Input.GetKeyUp(KeyCode.LeftShift)&& Input.GetKey(KeyCode.W))
+            else if(Input.GetKey(KeyCode.LeftShift)&& Input.GetKey(KeyCode.W))
             {
-                for (int i = 0; i <= 2500; i += 2)
+                for (int i = 0; i <= 3000; i += 1000)
                 {
                     for(int l=1;l<=10;l++)
                     {
@@ -75,14 +66,7 @@ public class CarController: MonoBehaviour
                     }
                 }
             }
-        
-        }
-        else
-        {
-            this.GetComponent<Rigidbody>().drag = 1f;
-        }
-       
-
+   
         for (int i=0;i<wheels.Count;i++)
         {
             wheels[i].motorTorque = s;

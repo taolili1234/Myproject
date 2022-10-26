@@ -30,7 +30,7 @@ public class CarController : MonoBehaviour
 
     private void Awake()
     {
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
     }
 
     void Start()
@@ -44,12 +44,13 @@ public class CarController : MonoBehaviour
     {
         for (int i = 0; i < wheels.Count; i++) 
         {
-            wheels[i].brakeTorque = _brakeTorque;
             wheelModel[i].Rotate(wheels[i].rpm / 60 * 360 * Time.deltaTime, 0, 0);
             wheels[i].GetWorldPose(out var pos, out var rot);
             wheelModel[i].position = pos;
             wheelModel[i].rotation = rot;
         }
+        wheels[1].brakeTorque = _brakeTorque;
+        wheels[2].brakeTorque = _brakeTorque;
     }
 
     public void FixedUpdate()
@@ -62,16 +63,16 @@ public class CarController : MonoBehaviour
             _brakeTorque = 0f;
             if (axleInfo.steering)
             {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    _brakeTorque = 6000f;
+                    Debug.Log("sss");
+                }
                 axleInfo.leftWheel.steerAngle = steering;
                 axleInfo.rightWheel.steerAngle = steering;
             }
             if (axleInfo.motor)
             {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    _brakeTorque = 2500f;
-                }
-
                 axleInfo.leftWheel.motorTorque = motor;
                 axleInfo.rightWheel.motorTorque = motor;
             }

@@ -22,10 +22,10 @@ public class CarController : MonoBehaviour
 
     public List<WheelCollider> wheels;
     public List<Transform> wheelModel;
-    float _brakeTorque;
     float steering = 0.0f;
     float motor = 0.0f;
-    
+    float _brakeTorque;
+
 
 
     private void Awake()
@@ -49,8 +49,19 @@ public class CarController : MonoBehaviour
             wheelModel[i].position = pos;
             wheelModel[i].rotation = rot;
         }
+        wheels[0].brakeTorque = _brakeTorque;
         wheels[1].brakeTorque = _brakeTorque;
-        wheels[2].brakeTorque = _brakeTorque;
+        if (Input.GetKey(KeyCode.Space))
+        {        
+            _brakeTorque = 1000f;
+            Debug.Log("sss");
+        }
+        else
+        {
+            _brakeTorque = 0f;
+        }
+
+
     }
 
     public void FixedUpdate()
@@ -60,19 +71,14 @@ public class CarController : MonoBehaviour
 
         foreach (AxleInfo axleInfo in axleInfos)
         {
-            _brakeTorque = 0f;
+            
             if (axleInfo.steering)
-            {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    _brakeTorque = 6000f;
-                    Debug.Log("sss");
-                }
+            {               
                 axleInfo.leftWheel.steerAngle = steering;
                 axleInfo.rightWheel.steerAngle = steering;
             }
             if (axleInfo.motor)
-            {
+            { 
                 axleInfo.leftWheel.motorTorque = motor;
                 axleInfo.rightWheel.motorTorque = motor;
             }
